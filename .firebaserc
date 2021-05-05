@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "hotel-cms-bfefc": {
+      "hosting": {
+        "Hotel-CMS": [
+          "hotel-cms-bfefc"
+        ]
+      }
+    }
+  }
+}
