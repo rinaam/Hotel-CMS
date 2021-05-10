@@ -1,7 +1,2 @@
-<ul>
-  <li class="text" *ngFor="let room of rooms | async">
-    {{ room.name }}
-  </li>
-</ul>
-
+<app-layout-header [headerLinks]="headerLinks"></app-layout-header>
 <router-outlet></router-outlet>

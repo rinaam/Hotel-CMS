@@ -9,6 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Hotel-CMS';
+
+  headerLinks = [
+    {
+      title: 'Home',
+      to: 'home',
+    },
+    {
+      title: 'Create Room',
+      to: 'create',
+    },
+  ];
   rooms: Observable<any[]>;
   constructor(firestore: AngularFirestore) {
     this.rooms = firestore.collection('rooms').valueChanges();
