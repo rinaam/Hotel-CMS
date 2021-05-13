@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Hotel-CMS';
 
   headerLinks = [
@@ -20,8 +21,10 @@ export class AppComponent {
       to: 'create',
     },
   ];
-  rooms: Observable<any[]>;
-  constructor(firestore: AngularFirestore) {
-    this.rooms = firestore.collection('rooms').valueChanges();
-  }
+
+  isLoggedIn$: Observable<boolean> = this.authService.loggedIn$;
+
+  constructor(firestore: AngularFirestore, private authService: AuthService) {}
+
+  ngOnInit() {}
 }

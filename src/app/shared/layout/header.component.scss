@@ -1,6 +1,9 @@
+@use "sass:map";
+@import "../../../styles/variables.scss";
+
 .nav {
   height: 45px;
-  padding: 8px;
+  padding: map.get($spacing, "s");
   &-container {
     margin: 0 auto;
     max-width: 1200px;
@@ -8,11 +11,11 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid $light-grey;
     .list {
       display: flex;
       &-item {
-        margin: 0px 8px;
+        margin: 0px map.get($spacing, "s");
         &-link {
           cursor: pointer;
         }

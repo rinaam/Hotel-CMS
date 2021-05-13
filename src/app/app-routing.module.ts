@@ -1,22 +1,27 @@
-import { AuthComponent } from './auth/auth.component';
-import { CreateRoomComponent } from './rooms/create-room.component';
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./auth/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./auth/register.module').then((m) => m.RegisterModule),
+  },
   {
     path: 'home',
-    component: HomeComponent,
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'create',
-    component: CreateRoomComponent,
-  },
-  {
-    path: 'signin',
-    component: AuthComponent,
+    loadChildren: () =>
+      import('./rooms/create-room.module').then((m) => m.CreateRoomModule),
   },
 ];
 

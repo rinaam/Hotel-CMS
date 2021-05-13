@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <mat-card>
+    <form [formGroup]="form" (submit)="register()">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" formControlName="email" required />
+        <mat-error> Please provide a valid email address </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+        <mat-error>
+          Please provide a valid password (min 8 characters)
+        </mat-error>
+      </mat-form-field>
+      <p>Already have an account? <a routerLink="../login">Login</a></p>
+      <button mat-flat-button color="primary">Register</button>
+    </form>
+  </mat-card>
+</div>
