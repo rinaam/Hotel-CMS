@@ -24,7 +24,7 @@ export class FileUploadService {
     fileUpload: FileUpload
   ): {
     percentage: Observable<number | undefined>;
-    imageUrl: Observable<string>;
+    imageName: string;
   } {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
@@ -45,7 +45,7 @@ export class FileUploadService {
 
     return {
       percentage: uploadTask.percentageChanges(),
-      imageUrl: storageRef.getDownloadURL(),
+      imageName: fileUpload.file.name,
     };
   }
 
@@ -63,6 +63,10 @@ export class FileUploadService {
         this.deleteFileStorage(fileUpload.name);
       })
       .catch((error) => console.log(error));
+  }
+
+  getImageUrl(imageName: string): Observable<string> {
+    return this.storage.ref(this.basePath + '/' + imageName).getDownloadURL();
   }
 
   private deleteFileDatabase(key: string): Promise<void> {

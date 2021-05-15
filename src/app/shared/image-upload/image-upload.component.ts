@@ -24,7 +24,7 @@ export class ImageUploadComponent implements OnInit {
     this.selectedFiles = undefined;
 
     this.currentFileUpload = new FileUpload(file);
-    const { percentage, imageUrl } = this.uploadService.pushFileToStorage(
+    const { percentage, imageName } = this.uploadService.pushFileToStorage(
       this.currentFileUpload
     );
 
@@ -36,6 +36,6 @@ export class ImageUploadComponent implements OnInit {
         console.log(error);
       }
     );
-    imageUrl.subscribe((url) => this.onImageUpload.emit(url));
+    this.onImageUpload.emit(imageName);
   }
 }

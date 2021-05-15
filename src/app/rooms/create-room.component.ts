@@ -17,7 +17,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup;
-  imageUrl: string = '';
+  imageName: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -31,10 +31,10 @@ export class CreateRoomComponent implements OnInit {
     });
   }
   save() {
-    if (this.imageUrl && this.form.valid) {
+    if (this.imageName && this.form.valid) {
       this.angularFirestore
         .collection('rooms')
-        .add({ ...this.form.value, imageUrl: this.imageUrl })
+        .add({ ...this.form.value, imageName: this.imageName })
         .then(() => {
           this.router.navigate(['/home']);
         });
@@ -49,7 +49,7 @@ export class CreateRoomComponent implements OnInit {
 
   ngOnInit() {}
 
-  getImageUrl(url: string) {
-    this.imageUrl = url;
+  getImageUrl(imageName: string) {
+    this.imageName = imageName;
   }
 }

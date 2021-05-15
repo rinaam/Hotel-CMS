@@ -3,7 +3,7 @@ export interface IRoom {
   name: string;
   description: string;
   type: RoomType;
-  image: IImage;
+  imageName: string;
 }
 
 type RoomType = 'standard' | 'delux';

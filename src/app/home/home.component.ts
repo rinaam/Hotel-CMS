@@ -1,15 +1,16 @@
 import { IRoom } from './../core/models/rooms.model';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   rooms: Observable<IRoom[]> = this.angularFirestore
     .collection('rooms')
     .snapshotChanges()
@@ -23,7 +24,16 @@ export class HomeComponent implements OnInit {
         })
       )
     );
-  constructor(private angularFirestore: AngularFirestore) {}
+  constructor(
+    private angularFirestore: AngularFirestore,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  getDetails(id: string) {
+    this.router.navigate(['/room', id]);
+  }
+
+  deleteRoom(id: string) {
+    this.angularFirestore.collection('rooms').doc(id).delete();
+  }
 }
