@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <div class="upload-input">
+    <label class="upload-input-label">
+      <input type="file" (change)="selectFile($event)" accept="image/*" />
+    </label>
+    <button mat-button color="primary" class="upload-input-btn">
+      <mat-icon>upload</mat-icon>
+      Choose image
+    </button>
+  </div>
+</div>
+<mat-progress-bar
+  *ngIf="currentFileUpload"
+  mode="determinate"
+  value="{{ percentage }}"
+  class="progress-bar"
+></mat-progress-bar>

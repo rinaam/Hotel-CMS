@@ -11,7 +11,7 @@
     @media (min-width: 768px) {
       @content;
     }
-  } @else if $point == smallDEvices {
+  } @else if $point == smallDevices {
     @media (min-width: 576px) {
       @content;
     }

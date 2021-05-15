@@ -1,0 +1,47 @@
+@use "sass:map";
+@import "../../styles/variables.scss";
+@import "../../styles/breakpoints.scss";
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: calc(100% - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .mat-card {
+    width: 100%;
+    margin: map.get($spacing, "xs");
+    @include breakpoint(smallDevices) {
+      width: auto;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: map.get($spacing, "s");
+    box-sizing: border-box;
+    @include breakpoint(smallDevices) {
+      width: 600px;
+    }
+    .mat-radio-button ~ .mat-radio-button {
+      margin-left: map.get($spacing, "m");
+    }
+    .mat-radio-button {
+      color: $dark-grey;
+    }
+    .margin-helper {
+      margin: map.get($spacing, "l") 0px;
+    }
+    textarea {
+      min-height: 150px;
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: map.get($spacing, "l");
+  }
+}

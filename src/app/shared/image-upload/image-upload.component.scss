@@ -1,0 +1,28 @@
+@use "sass:map";
+@import "../../../styles/variables.scss";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  .upload-input {
+    position: relative;
+    height: 30px;
+    width: 100%;
+    &-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &-label {
+      @extend .upload-input-btn;
+      z-index: 2;
+      opacity: 0;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+.progress-bar {
+  margin: map.get($spacing, "l") 0px;
+}

@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean> = this.authService.loggedIn$;
 
-  constructor(firestore: AngularFirestore, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 }

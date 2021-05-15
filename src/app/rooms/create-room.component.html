@@ -1,1 +1,30 @@
-<p>hello from create room</p>
+<div class="wrapper">
+  <mat-card>
+    <form [formGroup]="form">
+      <mat-form-field class="margin-helper">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+      <mat-radio-group
+        aria-label="Select an option"
+        name="room"
+        formControlName="type"
+        required
+      >
+        <mat-radio-button value="Standard">Standard</mat-radio-button>
+        <mat-radio-button value="Delux">Delux</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="margin-helper">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+      </mat-form-field>
+      <app-image-upload
+        (onImageUpload)="getImageUrl($event)"
+      ></app-image-upload>
+      <div class="actions">
+        <button mat-flat-button color="primary" (click)="save()">Save</button>
+        <button mat-button color="primary" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
