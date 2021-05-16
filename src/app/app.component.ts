@@ -1,5 +1,5 @@
 import { AuthService } from './core/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Hotel-CMS';
 
   headerLinks = [
@@ -24,6 +24,4 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean> = this.authService.loggedIn$;
 
   constructor(private authService: AuthService) {}
-
-  ngOnInit() {}
 }

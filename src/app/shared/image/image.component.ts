@@ -16,7 +16,7 @@ export class ImageComponent implements OnInit {
   imageUrl$!: Observable<string>;
   constructor(private fileUploadService: FileUploadService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.imageName) {
       this.imageUrl$ = this.fileUploadService.getImageUrl(this.imageName);
     } else if (this.file) {

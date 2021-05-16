@@ -9,15 +9,15 @@ import { FileUpload } from '../../core/models/fileUpload.model';
 export class ImageUploadComponent {
   selectedFiles?: FileList;
 
-  @Output() onSelectFile: EventEmitter<FileUpload> = new EventEmitter<
+  @Output() selectedFile: EventEmitter<FileUpload> = new EventEmitter<
     FileUpload
   >();
 
   selectFile(event: Event): void {
-    this.selectedFiles = (<HTMLInputElement>event.target).files as FileList;
+    this.selectedFiles = (event.target as HTMLInputElement).files as FileList;
     const file = this.selectedFiles?.item(0) as File;
     this.selectedFiles = undefined;
 
-    this.onSelectFile.emit(new FileUpload(file));
+    this.selectedFile.emit(new FileUpload(file));
   }
 }

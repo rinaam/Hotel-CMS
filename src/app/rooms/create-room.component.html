@@ -19,7 +19,7 @@
         <textarea matInput formControlName="description" required></textarea>
       </mat-form-field>
       <app-image-upload
-        (onSelectFile)="getCurrentFileUpload($event)"
+        (selectedFile)="getCurrentFileUpload($event)"
       ></app-image-upload>
       <div *ngIf="currentFileUpload" class="image-wrapper">
         <app-image [file]="currentFileUpload"></app-image>

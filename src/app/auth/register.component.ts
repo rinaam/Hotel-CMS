@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent {
   form: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -22,7 +22,7 @@ export class RegisterComponent {
     });
   }
 
-  register() {
+  register(): void {
     const { email, password } = this.form.value;
     this.authService
       .emailSignup(email, password)

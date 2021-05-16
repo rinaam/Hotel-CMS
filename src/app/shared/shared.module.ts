@@ -1,4 +1,3 @@
-import { ImageModule } from './image/image.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -10,8 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ImageComponent } from './image/image.component';
 
 @NgModule({
   imports: [
@@ -25,7 +22,6 @@ import { ImageComponent } from './image/image.component';
     MatButtonModule,
     MatRadioModule,
     MatIconModule,
-    MatProgressBarModule,
   ],
   declarations: [],
   exports: [
@@ -39,7 +35,6 @@ import { ImageComponent } from './image/image.component';
     MatButtonModule,
     MatRadioModule,
     MatIconModule,
-    MatProgressBarModule,
   ],
 })
 export class SharedModule {}

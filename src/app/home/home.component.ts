@@ -13,11 +13,11 @@ export class HomeComponent {
   rooms: Observable<IRoom[]> = this.roomsService.getRooms();
   constructor(private router: Router, private roomsService: RoomsService) {}
 
-  getDetails(id: string) {
+  getDetails(id: string): void {
     this.router.navigate(['/room', id]);
   }
 
-  deleteRoom(room: IRoom) {
+  deleteRoom(room: IRoom): void {
     this.roomsService.deleteRoom(room.id, room.imageName);
   }
 }

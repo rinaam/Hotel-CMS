@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  errorMessage: string = '';
+  errorMessage = '';
   form: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -22,7 +22,7 @@ export class LoginComponent {
     });
   }
 
-  login() {
+  login(): void {
     if (this.form.valid) {
       const { email, password } = this.form.value;
       this.authService

@@ -34,7 +34,7 @@ export class RoomsService {
     return this.angularFirestore.collection('rooms').add(payload);
   }
 
-  updateRoom(id: string, payload: IRoom) {
+  updateRoom(id: string, payload: IRoom): Promise<void> {
     console.log('upadting', payload);
     return this.angularFirestore
       .collection('rooms')

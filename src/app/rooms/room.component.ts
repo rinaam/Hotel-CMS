@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
   room$!: Observable<IRoom>;
-  roomId: string = '';
+  roomId = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -20,14 +20,14 @@ export class RoomComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.roomId = params.id;
       this.room$ = this.roomsService.getRoom(params.id);
     });
   }
 
-  editRoom() {
+  editRoom(): void {
     this.router.navigate(['room', this.roomId, 'edit']);
   }
 }

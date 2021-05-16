@@ -12,7 +12,7 @@ export class HeaderComponent {
   @Input() headerLinks: IHeader[] = [];
   constructor(private authService: AuthService) {}
 
-  signOut() {
+  signOut(): void {
     this.authService.logout();
   }
 }

@@ -20,7 +20,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup;
-  percentage: number = 0;
+  percentage = 0;
   currentFileUpload!: FileUpload;
   @Input() roomData?: IRoom;
 
@@ -36,7 +36,7 @@ export class CreateRoomComponent implements OnInit {
       description: ['', Validators.required],
     });
   }
-  save() {
+  save(): void {
     if (this.roomData) {
       return this.edit(this.roomData);
     }
@@ -55,7 +55,7 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 
-  edit(roomData: IRoom) {
+  edit(roomData: IRoom): void {
     if (this.form.valid) {
       let imageName = roomData.imageName;
       if (this.currentFileUpload) {
@@ -74,12 +74,12 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 
-  cancel() {
+  cancel(): void {
     this.form.reset();
     this.router.navigate(['/home']);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.roomData) {
       const { name, type, description } = this.roomData;
       this.form.setValue({
@@ -90,7 +90,7 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 
-  getCurrentFileUpload(fileUpload: FileUpload) {
+  getCurrentFileUpload(fileUpload: FileUpload): void {
     this.currentFileUpload = fileUpload;
   }
 }
