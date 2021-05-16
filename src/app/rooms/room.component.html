@@ -1,1 +1,11 @@
-<p>hello room</p>
+<div class="wrapper" *ngIf="room$ | async as room">
+  <div class="img">
+    <app-image [imageName]="room.imageName" [alt]="room.imageName"></app-image>
+  </div>
+  <div class="data">
+    <h2>{{ room.name }}</h2>
+    <h3>{{ room.type }}</h3>
+    <p>{{ room.description }}</p>
+    <button mat-flat-button color="primary" (click)="editRoom()">Edit</button>
+  </div>
+</div>

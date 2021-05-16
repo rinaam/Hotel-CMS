@@ -1,6 +1,5 @@
 import { AuthService } from './core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Create Room',
-      to: 'create',
+      to: 'room',
     },
   ];
 

@@ -1,33 +1,26 @@
 import { RoomsService } from './../core/services/rooms.service';
 import { Observable } from 'rxjs';
+
 import { IRoom } from './../core/models/rooms.model';
 import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-room-page',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.scss'],
+  selector: 'app-edit-room-page',
+  templateUrl: './edit-room.component.html',
+  styleUrls: ['./edit-room.component.scss'],
 })
-export class RoomComponent implements OnInit {
+export class EditRoomComponent implements OnInit {
   room$!: Observable<IRoom>;
-  roomId: string = '';
-
   constructor(
     private route: ActivatedRoute,
-    private roomsService: RoomsService,
-    private router: Router
+    private roomsService: RoomsService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.roomId = params.id;
       this.room$ = this.roomsService.getRoom(params.id);
     });
-  }
-
-  editRoom() {
-    this.router.navigate(['room', this.roomId, 'edit']);
   }
 }

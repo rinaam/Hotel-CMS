@@ -1,6 +1,9 @@
+import { RoomsService } from './../core/services/rooms.service';
+import { FileUpload } from './../core/models/fileUpload.model';
+import { FileUploadService } from './../core/services/upload-image.service';
+import { IRoom } from './../core/models/rooms.model';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -17,12 +20,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup;
-  imageName: string = '';
+  percentage: number = 0;
+  currentFileUpload!: FileUpload;
+  @Input() roomData?: IRoom;
 
   constructor(
     private fb: FormBuilder,
-    private angularFirestore: AngularFirestore,
-    private router: Router
+    private roomsService: RoomsService,
+    private router: Router,
+    private fileUploadService: FileUploadService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -31,25 +37,60 @@ export class CreateRoomComponent implements OnInit {
     });
   }
   save() {
-    if (this.imageName && this.form.valid) {
-      this.angularFirestore
-        .collection('rooms')
-        .add({ ...this.form.value, imageName: this.imageName })
+    if (this.roomData) {
+      return this.edit(this.roomData);
+    }
+    if (this.currentFileUpload && this.form.valid) {
+      const { imageName } = this.fileUploadService.pushFileToStorage(
+        this.currentFileUpload
+      );
+
+      this.roomsService
+        .createRoom({ ...this.form.value, imageName })
         .then(() => {
           this.router.navigate(['/home']);
         });
     } else {
-      alert('missing image');
+      alert(1);
+    }
+  }
+
+  edit(roomData: IRoom) {
+    if (this.form.valid) {
+      let imageName = roomData.imageName;
+      if (this.currentFileUpload) {
+        imageName = this.fileUploadService.pushFileToStorage(
+          this.currentFileUpload
+        ).imageName;
+      }
+      this.roomsService
+        .updateRoom(roomData.id, {
+          ...this.form.value,
+          imageName,
+        })
+        .then(() => {
+          this.router.navigate(['/home']);
+        });
     }
   }
 
   cancel() {
     this.form.reset();
+    this.router.navigate(['/home']);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.roomData) {
+      const { name, type, description } = this.roomData;
+      this.form.setValue({
+        name,
+        type,
+        description,
+      });
+    }
+  }
 
-  getImageUrl(imageName: string) {
-    this.imageName = imageName;
+  getCurrentFileUpload(fileUpload: FileUpload) {
+    this.currentFileUpload = fileUpload;
   }
 }

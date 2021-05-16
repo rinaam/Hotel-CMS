@@ -57,20 +57,12 @@ export class FileUploadService {
     return this.storage.ref(this.basePath).child(fileName);
   }
 
-  deleteFile(fileUpload: FileUpload): void {
-    this.deleteFileDatabase(fileUpload.key)
-      .then(() => {
-        this.deleteFileStorage(fileUpload.name);
-      })
-      .catch((error) => console.log(error));
+  deleteFile(imageName: string): void {
+    this.deleteFileStorage(imageName);
   }
 
   getImageUrl(imageName: string): Observable<string> {
     return this.storage.ref(this.basePath + '/' + imageName).getDownloadURL();
-  }
-
-  private deleteFileDatabase(key: string): Promise<void> {
-    return this.db.list(this.basePath).remove(key);
   }
 
   private deleteFileStorage(name: string): void {

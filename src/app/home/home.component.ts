@@ -1,7 +1,6 @@
+import { RoomsService } from './../core/services/rooms.service';
 import { IRoom } from './../core/models/rooms.model';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -11,29 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  rooms: Observable<IRoom[]> = this.angularFirestore
-    .collection('rooms')
-    .snapshotChanges()
-    .pipe(
-      map((snaps) =>
-        snaps.map((snap) => {
-          return {
-            id: snap.payload.doc.id,
-            ...(snap.payload.doc.data() as {}),
-          } as IRoom;
-        })
-      )
-    );
-  constructor(
-    private angularFirestore: AngularFirestore,
-    private router: Router
-  ) {}
+  rooms: Observable<IRoom[]> = this.roomsService.getRooms();
+  constructor(private router: Router, private roomsService: RoomsService) {}
 
   getDetails(id: string) {
     this.router.navigate(['/room', id]);
   }
 
-  deleteRoom(id: string) {
-    this.angularFirestore.collection('rooms').doc(id).delete();
+  deleteRoom(room: IRoom) {
+    this.roomsService.deleteRoom(room.id, room.imageName);
   }
 }

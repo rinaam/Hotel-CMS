@@ -26,3 +26,9 @@
 .progress-bar {
   margin: map.get($spacing, "l") 0px;
 }
+
+.image-wrapper {
+  height: 100px;
+  width: 100px;
+  margin: map.get($spacing, "s");
+}

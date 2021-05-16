@@ -3,8 +3,7 @@
 @import "../../styles/breakpoints.scss";
 
 .wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
+  @include center;
   height: calc(100% - 60px);
   display: flex;
   justify-content: center;
@@ -36,12 +35,17 @@
       margin: map.get($spacing, "l") 0px;
     }
     textarea {
-      min-height: 150px;
+      min-height: 100px;
     }
   }
   .actions {
     display: flex;
     justify-content: flex-end;
     margin-top: map.get($spacing, "l");
+  }
+  .image-wrapper {
+    height: 100px;
+    width: 100px;
+    margin: map.get($spacing, "m");
   }
 }

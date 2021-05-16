@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FileUploadService } from '../../core/services/upload-image.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FileUpload } from '../../core/models/fileUpload.model';
 
 @Component({
@@ -7,35 +6,18 @@ import { FileUpload } from '../../core/models/fileUpload.model';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss'],
 })
-export class ImageUploadComponent implements OnInit {
+export class ImageUploadComponent {
   selectedFiles?: FileList;
-  currentFileUpload!: FileUpload;
-  percentage: number = 0;
 
-  @Output() onImageUpload: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor(private uploadService: FileUploadService) {}
-
-  ngOnInit(): void {}
+  @Output() onSelectFile: EventEmitter<FileUpload> = new EventEmitter<
+    FileUpload
+  >();
 
   selectFile(event: Event): void {
     this.selectedFiles = (<HTMLInputElement>event.target).files as FileList;
     const file = this.selectedFiles?.item(0) as File;
     this.selectedFiles = undefined;
 
-    this.currentFileUpload = new FileUpload(file);
-    const { percentage, imageName } = this.uploadService.pushFileToStorage(
-      this.currentFileUpload
-    );
-
-    percentage.subscribe(
-      (percentage) => {
-        this.percentage = Math.round(percentage as number);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    this.onImageUpload.emit(imageName);
+    this.onSelectFile.emit(new FileUpload(file));
   }
 }

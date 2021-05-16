@@ -1,0 +1,14 @@
+@use "sass:map";
+@import "../../styles/variables.scss";
+
+.wrapper {
+  @include center;
+
+  .data {
+    padding: map.get($spacing, "xs");
+  }
+
+  .img {
+    height: 500px;
+  }
+}

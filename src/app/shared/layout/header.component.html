@@ -2,7 +2,13 @@
   <div class="nav-container">
     <ul class="list">
       <li class="list-item" *ngFor="let link of headerLinks">
-        <a class="list-item-link" [routerLink]="[link.to]">{{ link.title }}</a>
+        <a
+          class="list-item-link"
+          [routerLink]="[link.to]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ link.title }}</a
+        >
       </li>
     </ul>
     <a class="list-item-link" routerLink="login" (click)="signOut()">Logout</a>
