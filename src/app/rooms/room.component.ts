@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
   room$!: Observable<IRoom>;
-  roomId: string = '';
+  roomId = '';
 
   constructor(
     private route: ActivatedRoute,

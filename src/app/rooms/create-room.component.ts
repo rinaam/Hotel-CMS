@@ -21,7 +21,7 @@ import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup;
-  errorMessage: string = '';
+  errorMessage = '';
   currentFileUpload!: FileUpload;
   isSubmitting = false;
   @Input() roomData?: IRoom;
