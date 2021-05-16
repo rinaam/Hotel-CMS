@@ -17,6 +17,8 @@ import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' },
     },
+    // issue and fix -> https://github.com/angular/components/issues/11453#issuecomment-466038415
+    { provide: ANIMATION_MODULE_TYPE, useValue: 'BrowserAnimations' },
   ],
 })
 export class CreateRoomComponent implements OnInit {
