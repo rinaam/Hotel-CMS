@@ -1,6 +1,9 @@
 <div class="wrapper" *ngIf="room$ | async as room">
   <div class="img">
-    <app-image [imageName]="room.imageName" [alt]="room.imageName"></app-image>
+    <app-image
+      [imageName]="room.image.name"
+      [alt]="room.image.name"
+    ></app-image>
   </div>
   <div class="data">
     <h2>{{ room.name }}</h2>

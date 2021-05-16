@@ -38,6 +38,10 @@
       min-height: 100px;
     }
   }
+  .error-message {
+    color: $red;
+    margin: map.get($spacing, "s") 0px;
+  }
   .actions {
     display: flex;
     justify-content: flex-end;

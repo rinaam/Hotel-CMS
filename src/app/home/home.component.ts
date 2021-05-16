@@ -18,6 +18,6 @@ export class HomeComponent {
   }
 
   deleteRoom(room: IRoom): void {
-    this.roomsService.deleteRoom(room.id, room.imageName);
+    this.roomsService.deleteRoom(room.id, room.image.name);
   }
 }

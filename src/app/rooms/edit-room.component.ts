@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edit-room-page',
   templateUrl: './edit-room.component.html',
-  styleUrls: ['./edit-room.component.scss'],
 })
 export class EditRoomComponent implements OnInit {
   room$!: Observable<IRoom>;

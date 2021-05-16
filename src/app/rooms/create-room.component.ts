@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-create-room-page',
@@ -20,8 +21,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateRoomComponent implements OnInit {
   form: FormGroup;
-  percentage = 0;
+  errorMessage: string = '';
   currentFileUpload!: FileUpload;
+  isSubmitting = false;
   @Input() roomData?: IRoom;
 
   constructor(
@@ -32,43 +34,51 @@ export class CreateRoomComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      type: ['', Validators.required],
+      type: ['Standard', Validators.required],
       description: ['', Validators.required],
     });
   }
-  save(): void {
+
+  async save(): Promise<void> {
     if (this.roomData) {
       return this.edit(this.roomData);
     }
     if (this.currentFileUpload && this.form.valid) {
-      const { imageName } = this.fileUploadService.pushFileToStorage(
+      this.isSubmitting = true;
+
+      const imageName = await this.fileUploadService.pushFileToStorage(
         this.currentFileUpload
       );
 
       this.roomsService
-        .createRoom({ ...this.form.value, imageName })
+        .createRoom({ ...this.form.value, image: { name: imageName } })
         .then(() => {
+          this.isSubmitting = false;
           this.router.navigate(['/home']);
         });
     } else {
-      alert(1);
+      this.isSubmitting = false;
+      this.errorMessage = 'Image is required';
     }
   }
 
-  edit(roomData: IRoom): void {
+  async edit(roomData: IRoom): Promise<void> {
     if (this.form.valid) {
-      let imageName = roomData.imageName;
+      this.isSubmitting = true;
+
+      let imageName = roomData.image.name;
       if (this.currentFileUpload) {
-        imageName = this.fileUploadService.pushFileToStorage(
+        imageName = await this.fileUploadService.pushFileToStorage(
           this.currentFileUpload
-        ).imageName;
+        );
       }
       this.roomsService
         .updateRoom(roomData.id, {
           ...this.form.value,
-          imageName,
+          image: { name: imageName },
         })
         .then(() => {
+          this.isSubmitting = false;
           this.router.navigate(['/home']);
         });
     }

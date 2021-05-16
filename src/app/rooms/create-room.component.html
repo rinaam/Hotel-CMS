@@ -1,6 +1,6 @@
 <div class="wrapper">
   <mat-card>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="save()">
       <mat-form-field class="margin-helper">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" required />
@@ -25,13 +25,24 @@
         <app-image [file]="currentFileUpload"></app-image>
       </div>
       <div *ngIf="roomData && !currentFileUpload" class="image-wrapper">
-        <app-image [imageName]="roomData.imageName"></app-image>
+        <app-image [imageName]="roomData.image.name"></app-image>
       </div>
-
+      <mat-error *ngIf="!currentFileUpload">{{ errorMessage }}</mat-error>
       <div class="actions">
-        <button mat-flat-button color="primary" (click)="save()">Save</button>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="isSubmitting"
+          type="submit"
+        >
+          Save
+        </button>
         <button mat-button color="primary" (click)="cancel()">Cancel</button>
       </div>
     </form>
+    <mat-progress-bar
+      *ngIf="isSubmitting"
+      mode="indeterminate"
+    ></mat-progress-bar>
   </mat-card>
 </div>

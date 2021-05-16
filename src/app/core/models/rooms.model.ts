@@ -3,12 +3,12 @@ export interface IRoom {
   name: string;
   description: string;
   type: RoomType;
-  imageName: string;
+  image: IImage;
 }
 
 type RoomType = 'standard' | 'delux';
 
 export interface IImage {
-  id: string;
+  id?: string;
   name: string;
 }
