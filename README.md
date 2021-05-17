@@ -1,5 +1,9 @@
 # HotelCMS
 
+- App is hosted on [netlify](https://optimistic-easley-0b0832.netlify.app/)
+
+- Designs can be found [here](https://www.figma.com/file/rmLuYC7CjGZuxefmi8H2wo/HotelCms?node-id=0%3A1)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.3.
 
 ## Development server
